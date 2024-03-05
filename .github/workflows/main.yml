@@ -8,7 +8,7 @@ on:
 jobs:
   - name: Check Changes
     id: check_changes
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     outputs:
       job1_completed: ${{ steps.job1_completed.outputs.job1_completed }}
     steps:
