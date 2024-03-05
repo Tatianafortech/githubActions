@@ -2,13 +2,22 @@ jobs:
   check_changes:
     runs-on: self-hosted
     outputs:
-      job1_completed: ${{ steps.job1_completed.outputs.job1_completed }}
+      job1_completed: ${{ steps.check_changes.outputs.job1_completed }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+
       - name: Check Changes
-        id: job1_completed
+        id: check_changes
         run: |
-          # Add your logic here to check for changes in the repository
-          # If changes are detected, set the job1_completed output to true
-          echo "::set-output name=job1_completed::true"
+          # Fetch the latest changes from the remote repository
+          git fetch
+
+          # Compare the local commit hash with the remote repository
+          if [ "$(git rev-parse HEAD)" != "$(git rev-parse origin/main)" ]; then
+            echo "Changes detected."
+            echo "::set-output name=job1_completed::true"
+          else
+            echo "No changes."
+            echo "::set-output name=job1_completed::false"
+          fi
