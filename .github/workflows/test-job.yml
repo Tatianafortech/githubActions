@@ -23,3 +23,22 @@ jobs:
       run: |
         "/Applications/Katalon Studio Engine.app/Contents/MacOS/katalonc" -projectPath="/Users/Taco/git/taco-android-katalon-2024/taco-android-katalon.prj" -retry=0 -testSuitePath="Test Suites/Sanity EU Android" -browserType="Remote" -executionProfile="Staging" -apiKey="84716a34-e53b-4a5f-b6ea-6f79104057ca" -orgID=230612 -testOpsProjectId=875662 --config -proxy.auth.option=NO_PROXY -proxy.system.option=NO_PROXY -proxy.system.applyToDesiredCapabilities=true -webui.autoUpdateDrivers=true
       shell: bash
+
+    - name: Post-build actions
+      if: always()
+      run: |
+          if [[ ${{ job.status }} == 'success' ]]; then
+            # Slack notification on success
+            echo "Job '${{ github.job }}' completed successfully! :white_check_mark: \nMore Info can be found here: ${{ github.run_url }}"
+            # Add Slack notification logic here using GitHub Actions' Slack action or other methods
+          else
+            # Slack notification on failure
+            echo "Job '${{ github.job }}' failed :x: \nMore Info can be found here: ${{ github.run_url }}"
+            # Add Slack notification logic here using GitHub Actions' Slack action or other methods
+          fi
+
+          # Always publish HTML reports on successful build
+          if [[ ${{ job.status }} == 'success' ]]; then
+            echo "Publishing HTML reports..."
+            # Add HTML report publishing logic here using GitHub Actions steps
+          fi
