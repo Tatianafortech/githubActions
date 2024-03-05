@@ -16,9 +16,6 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-    # - name: Set Working Directory
-    #   run: cd /Applications/Katalon\ Studio\ Engine.app/Contents/MacOS/
-    #   shell: bash
     - name: Run Katalon Studio
       run: |
         "/Applications/Katalon Studio Engine.app/Contents/MacOS/katalonc" -projectPath="/Users/Taco/git/taco-android-katalon-2024/taco-android-katalon.prj" -retry=0 -testSuitePath="Test Suites/Sanity EU Android" -browserType="Remote" -executionProfile="Staging" -apiKey="84716a34-e53b-4a5f-b6ea-6f79104057ca" -orgID=230612 -testOpsProjectId=875662 --config -proxy.auth.option=NO_PROXY -proxy.system.option=NO_PROXY -proxy.system.applyToDesiredCapabilities=true -webui.autoUpdateDrivers=true
