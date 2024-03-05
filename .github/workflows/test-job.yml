@@ -1,9 +1,15 @@
 name: Smoke
 
+# on:
+#   push:
+#     branches: [ main ]
 on:
-  push:
-    branches: [ main ]
-
+  workflow_dispatch:
+    inputs:
+      repo_name:
+        description: 'Name of the repository'
+        required: true
+        
 jobs:
   build:
     runs-on: self-hosted
