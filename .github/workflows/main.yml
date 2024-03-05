@@ -20,6 +20,7 @@ jobs:
           # Add your logic here to check for changes in the repository
           # If changes are detected, set the job1_completed output to true
           echo "::set-output name=job1_completed::true"
+          echo "test1"
 
   - name: Run Katalon Studio
     id: run_katalon
